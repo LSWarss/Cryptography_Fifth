@@ -9,10 +9,10 @@ def test_transposition_column():
     assert transposition_column(test_string,3)
 
 def test_cipher():
-    textArray = cipher_text("cipher_testing.txt", 4)
+    textArray = cipher_text("./tests/cipher_testing.txt", 4)
     assert isinstance(textArray, list)
     text = " ".join(str(x) for x in textArray)
     assert isinstance(text, str)
-    assert open("cipher_testing_ciphered_4.txt")
+    assert open("./tests/cipher_testing_ciphered_4.txt")
 
     
