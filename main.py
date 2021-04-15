@@ -1,4 +1,4 @@
 from cipher.cipher import cipher_text
 
 
-cipher_text("sample.txt")
+print(cipher_text("sample.txt", 4))
