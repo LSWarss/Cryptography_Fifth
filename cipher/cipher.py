@@ -54,6 +54,7 @@ def decipher_text(path,key):
 
     f = open(path)
     text_string = f.read()
+    decipher_text = []
     
     for char in text_string:
         if char in all_letters:
@@ -62,9 +63,15 @@ def decipher_text(path,key):
         else:
             temp = char
             decrypt_txt.append(temp)
-            
-    decrypt_txt = "".join(decrypt_txt)
-    print("Recovered plain text :", decrypt_txt) 
+    
+    chunksArray = [text_string[i: i + 200] for i in range(0, len(decipher_text), 200)]
+    for i in range(len(chunksArray)): 
+        if(i % 2 == 0): 
+            chunksArray[i] = transposition_row(chunksArray[i])
+        if(i % 3 == 0):
+            chunksArray[i] = detranspostion_column(chunksArray[i],3)
+
+    return chunksArray
 
 def save_ciphered_to_file(path,key, array):
     f=open(f'{path[:-4]}_ciphered_{key}.txt', 'w')
@@ -81,7 +88,7 @@ def transposition_column(row: str,transpostion_steps: int):
     column_number = random.randint(0, len(row))
     return row.replace(row[column_number], row[column_number+transpostion_steps]).replace(row[column_number+transpostion_steps], row[column_number]) if column_number + transpostion_steps < len(row) else row
 
-
-
-def decipher_text(path):
-    pass
+def detranspostion_column(row: str, transpostion_steps : int):
+    assert type(row) == str
+    column_number = random.randint(0, len(row))
+    return row.replace(row[column_number+transpostion_steps],row[column_number]).replace( row[column_number],row[column_number+transpostion_steps]) if column_number + transpostion_steps < len(row) else row

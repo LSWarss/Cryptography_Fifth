@@ -14,5 +14,5 @@ def test_cipher():
     text = " ".join(str(x) for x in textArray)
     assert isinstance(text, str)
     assert open("cipher_testing_ciphered_4.txt")
-    
+
     
